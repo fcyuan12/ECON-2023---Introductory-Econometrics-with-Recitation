@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>3 Introduction | Homework 1</title>
+  <meta name="description" content="3 Introduction | Homework 1" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="3 Introduction | Homework 1" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="3 Introduction | Homework 1" />
+  
+  
+  
+
+<meta name="author" content="Chi-Yuan Fang" />
+
+
+<meta name="date" content="2021-02-25" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="computer-exercises.html"/>
+<link rel="next" href="data-set-possum.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">TA Session 1</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Textbook Exercises</a><ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#exercise-2.6"><i class="fa fa-check"></i><b>1.1</b> Exercise 2.6</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#exercise-2.8"><i class="fa fa-check"></i><b>1.2</b> Exercise 2.8</a></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#exercise-2.14"><i class="fa fa-check"></i><b>1.3</b> Exercise 2.14</a></li>
+<li class="chapter" data-level="1.4" data-path="index.html"><a href="index.html#exercise-2.25"><i class="fa fa-check"></i><b>1.4</b> Exercise 2.25</a></li>
+<li class="chapter" data-level="1.5" data-path="index.html"><a href="index.html#exercise-3.2"><i class="fa fa-check"></i><b>1.5</b> Exercise 3.2</a></li>
+<li class="chapter" data-level="1.6" data-path="index.html"><a href="index.html#exercise-3.3"><i class="fa fa-check"></i><b>1.6</b> Exercise 3.3</a></li>
+<li class="chapter" data-level="1.7" data-path="index.html"><a href="index.html#exercise-3.4"><i class="fa fa-check"></i><b>1.7</b> Exercise 3.4</a></li>
+<li class="chapter" data-level="1.8" data-path="index.html"><a href="index.html#exercise-3.9"><i class="fa fa-check"></i><b>1.8</b> Exercise 3.9</a></li>
+<li class="chapter" data-level="1.9" data-path="index.html"><a href="index.html#exercise-3.13"><i class="fa fa-check"></i><b>1.9</b> Exercise 3.13</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="computer-exercises.html"><a href="computer-exercises.html"><i class="fa fa-check"></i><b>2</b> Computer exercises</a><ul>
+<li class="chapter" data-level="2.1" data-path="computer-exercises.html"><a href="computer-exercises.html#e3.2"><i class="fa fa-check"></i><b>2.1</b> E3.2</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>3</b> Introduction</a><ul>
+<li class="chapter" data-level="3.1" data-path="introduction.html"><a href="introduction.html#ta-information"><i class="fa fa-check"></i><b>3.1</b> TA Information</a></li>
+<li class="chapter" data-level="3.2" data-path="introduction.html"><a href="introduction.html#ta-sessions-schedule"><i class="fa fa-check"></i><b>3.2</b> TA Sessions Schedule</a></li>
+<li class="chapter" data-level="3.3" data-path="introduction.html"><a href="introduction.html#reference"><i class="fa fa-check"></i><b>3.3</b> Reference</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="data-set-possum.html"><a href="data-set-possum.html"><i class="fa fa-check"></i><b>4</b> Data Set: <code>possum</code></a><ul>
+<li class="chapter" data-level="4.1" data-path="data-set-possum.html"><a href="data-set-possum.html#data-description"><i class="fa fa-check"></i><b>4.1</b> Data Description</a><ul>
+<li class="chapter" data-level="4.1.1" data-path="data-set-possum.html"><a href="data-set-possum.html#background"><i class="fa fa-check"></i><b>4.1.1</b> Background</a></li>
+<li class="chapter" data-level="4.1.2" data-path="data-set-possum.html"><a href="data-set-possum.html#variables"><i class="fa fa-check"></i><b>4.1.2</b> Variables</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="data-set-possum.html"><a href="data-set-possum.html#input-data"><i class="fa fa-check"></i><b>4.2</b> Input Data</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="data-set-possum.html"><a href="data-set-possum.html#csv-file"><i class="fa fa-check"></i><b>4.2.1</b> <code>csv</code> File</a></li>
+<li class="chapter" data-level="4.2.2" data-path="data-set-possum.html"><a href="data-set-possum.html#package"><i class="fa fa-check"></i><b>4.2.2</b> Package</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="data-set-possum.html"><a href="data-set-possum.html#data-cleaning"><i class="fa fa-check"></i><b>4.3</b> Data Cleaning</a><ul>
+<li class="chapter" data-level="4.3.1" data-path="data-set-possum.html"><a href="data-set-possum.html#remove-missing-values"><i class="fa fa-check"></i><b>4.3.1</b> Remove Missing Values</a></li>
+<li class="chapter" data-level="4.3.2" data-path="data-set-possum.html"><a href="data-set-possum.html#delete-rows-with-specific-conditions"><i class="fa fa-check"></i><b>4.3.2</b> Delete Rows with Specific Condition(s)</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="data-set-possum.html"><a href="data-set-possum.html#correlation"><i class="fa fa-check"></i><b>4.4</b> Correlation</a></li>
+<li class="chapter" data-level="4.5" data-path="data-set-possum.html"><a href="data-set-possum.html#graphical-analysis"><i class="fa fa-check"></i><b>4.5</b> Graphical Analysis</a><ul>
+<li class="chapter" data-level="4.5.1" data-path="data-set-possum.html"><a href="data-set-possum.html#scatter-plot"><i class="fa fa-check"></i><b>4.5.1</b> Scatter Plot</a></li>
+<li class="chapter" data-level="4.5.2" data-path="data-set-possum.html"><a href="data-set-possum.html#box-plot-check-for-outliers"><i class="fa fa-check"></i><b>4.5.2</b> Box Plot: Check for Outliers</a></li>
+<li class="chapter" data-level="4.5.3" data-path="data-set-possum.html"><a href="data-set-possum.html#density-plot-check-for-normality"><i class="fa fa-check"></i><b>4.5.3</b> Density Plot: Check for Normality</a></li>
+</ul></li>
+<li class="chapter" data-level="4.6" data-path="data-set-possum.html"><a href="data-set-possum.html#linear-regression"><i class="fa fa-check"></i><b>4.6</b> Linear Regression</a><ul>
+<li class="chapter" data-level="4.6.1" data-path="data-set-possum.html"><a href="data-set-possum.html#model"><i class="fa fa-check"></i><b>4.6.1</b> Model</a></li>
+<li class="chapter" data-level="4.6.2" data-path="data-set-possum.html"><a href="data-set-possum.html#residual-analysis"><i class="fa fa-check"></i><b>4.6.2</b> Residual Analysis</a></li>
+</ul></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Homework 1</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="introduction" class="section level1">
+<h1><span class="header-section-number">3</span> Introduction</h1>
+<div id="ta-information" class="section level2">
+<h2><span class="header-section-number">3.1</span> TA Information</h2>
+<p>TA: Chi-Yuan Fang</p>
+<p>TA sessions: Tuesday 1:20 – 3:10 PM (SS 501)</p>
+<p>Email: <a href="mailto:r09323017@ntu.edu.tw" class="email">r09323017@ntu.edu.tw</a></p>
+<p>Office hours: Tuesday 3:20 - 4:10 PM or by appointments (SS 643)</p>
+<p>Class group on Facebook: Statistics with Recitation (Fall 2020) <a href="https://www.facebook.com/groups/452292659024369/" class="uri">https://www.facebook.com/groups/452292659024369/</a></p>
+<p>Because screens are not clear in SS 501, I would provide live screen in the group.</p>
+</div>
+<div id="ta-sessions-schedule" class="section level2">
+<h2><span class="header-section-number">3.2</span> TA Sessions Schedule</h2>
+<table>
+<colgroup>
+<col width="8%" />
+<col width="19%" />
+<col width="8%" />
+<col width="37%" />
+<col width="25%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Week</th>
+<th>TA Sessions</th>
+<th>Quiz</th>
+<th>Content</th>
+<th>Remind</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>09/15: No class</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>09/22: Class 1</td>
+<td></td>
+<td>Part 1: Introduction, Data Visualization</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>09/29: Class 2</td>
+<td></td>
+<td>Part 1</td>
+<td>10/07 Turn in HW1</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>10/06: Class 3</td>
+<td></td>
+<td>Part 2: Distributions (1)</td>
+<td>10/07 Turn in HW1, 10/13 Quiz 1</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>10/13: Class 4</td>
+<td>Quiz 1</td>
+<td>Part 2</td>
+<td>10/21 Turn in HW2</td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td>10/20: Class 5</td>
+<td></td>
+<td>Part 3: Distributions (2)</td>
+<td>10/21 Turn in HW2, 10/27 Quiz 2</td>
+</tr>
+<tr class="odd">
+<td>7</td>
+<td>10/27: Class 6</td>
+<td>Quiz 2</td>
+<td>Part 3</td>
+<td>11/04 Turn in HW3</td>
+</tr>
+<tr class="even">
+<td>8</td>
+<td>11/03: Class 7</td>
+<td></td>
+<td>Part 4: Test</td>
+<td>11/04 Turn in HW3, 11/10 Quiz 3</td>
+</tr>
+<tr class="odd">
+<td>9</td>
+<td>11/10: Class 8</td>
+<td>Quiz 3</td>
+<td>Part 4</td>
+<td><strong>11/18 Midterm</strong></td>
+</tr>
+<tr class="even">
+<td>10</td>
+<td>11/17: Class 9</td>
+<td></td>
+<td>Review and Q&amp;A</td>
+<td><strong>11/18 Midterm</strong>, 11/25 Turn in HW4</td>
+</tr>
+<tr class="odd">
+<td>11</td>
+<td>11/24: Class 10</td>
+<td></td>
+<td>Part 5: Model (1) ANOVA</td>
+<td>11/25 Turn in HW4, 12/01 Quiz 4</td>
+</tr>
+<tr class="even">
+<td>12</td>
+<td>12/01: Class 11</td>
+<td>Quiz 4</td>
+<td>Part 5</td>
+<td>12/09 Turn in HW5</td>
+</tr>
+<tr class="odd">
+<td>13</td>
+<td>12/08: Class 12</td>
+<td></td>
+<td>Part 6: Model (2) Regression</td>
+<td>12/09 Turn in HW5, 12/15 Quiz 5</td>
+</tr>
+<tr class="even">
+<td>14</td>
+<td>12/15: Class 13</td>
+<td>Quiz 5</td>
+<td>Part 6</td>
+<td>12/23 Turn in HW6</td>
+</tr>
+<tr class="odd">
+<td>15</td>
+<td>12/22: Class 14</td>
+<td></td>
+<td>Review and Q&amp;A</td>
+<td>12/23 Turn in HW6, 12/29 Quiz 6</td>
+</tr>
+<tr class="even">
+<td>16</td>
+<td>12/29: Class 15</td>
+<td>Quiz 6</td>
+<td>Review and Q&amp;A</td>
+<td><strong>01/13 Final Exam</strong></td>
+</tr>
+<tr class="odd">
+<td>17</td>
+<td>01/05: No class</td>
+<td></td>
+<td></td>
+<td><strong>01/13 Final Exam</strong></td>
+</tr>
+<tr class="even">
+<td>18</td>
+<td>01/12: No class</td>
+<td></td>
+<td></td>
+<td><strong>01/13 Final Exam</strong></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="reference" class="section level2">
+<h2><span class="header-section-number">3.3</span> Reference</h2>
+<p>What is a good book on learning R with examples? <a href="https://www.quora.com/What-is-a-good-book-on-learning-R-with-examples" class="uri">https://www.quora.com/What-is-a-good-book-on-learning-R-with-examples</a></p>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="computer-exercises.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="data-set-possum.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
