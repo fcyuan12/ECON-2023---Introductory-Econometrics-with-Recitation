@@ -532,7 +532,7 @@ Let the significance level be 0.05.
 Test statistics:
 \begin{align}
     t 
-    & = \frac{\left[ \left(\overline{w}_{2015}^{col} - \overline{w}_{2015}^{hs}\right) - \left(\overline{w}_{1996}^{col} - \overline{w}_{1996}^{hs}\right) \right] - 0}{\sqrt{ \left( \frac{s_{2015,col}^{2}}{n_{2015}^{col}} + \frac{s_{2015,hs}^{2}}{n_{2015}^{hs}} \right) + \left( \frac{s_{1996,col}^{2}}{n_{1996}^{col}} + \frac{s_{1996,hs}^{2}}{n_{1996}^{hs}} \right) }},
+    & = \frac{\left[ \left(\overline{w}_{2015}^{col} - \overline{w}_{2015}^{hs}\right) - \left(\overline{w}_{1996}^{col} - \overline{w}_{1996}^{hs}\right) \right] - 0}{\sqrt{ \left( \frac{s_{2015,col}^{2}}{n_{2015}^{col}} + \frac{s_{2015,hs}^{2}}{n_{2015}^{hs}} \right) + \left( \frac{s_{1996,col}^{2}}{n_{1996}^{col}} + \frac{s_{1996,hs}^{2}}{n_{1996}^{hs}} \right) }}
 \end{align}
 
 95\% confidence interval: 
