@@ -418,7 +418,7 @@ t.test(CPS96col$ahe_adjust, CPS96hs$ahe_adjust,
 i. 
 *  **Prepare**
 
-$H_0: wage_{2015}^{hs} - wage_{1996}^{hs} = 0$ v.s. $H_1: wage_{2015}^{hs} - wage_{1996}^{hs} \neq 0$
+$H_0: \overline{wage}_{2015}^{hs} - \overline{wage}_{1996}^{hs} = 0$ v.s. $H_1: \overline{wage}_{2015}^{hs} - \overline{wage}_{1996}^{hs} \neq 0$
 
 Let the significance level be 0.05.
 
@@ -484,7 +484,7 @@ ii.
 
 *  **Prepare**
 
-$H_0: wage_{2015}^{col} - wage_{1996}^{col} = 0$ v.s. $H_1: wage_{2015}^{col} - wage_{1996}^{col} \neq 0$
+$H_0: \overline{wage}_{2015}^{col} - \overline{wage}_{1996}^{col} = 0$ v.s. $H_1: \overline{wage}_{2015}^{col} - \overline{wage}_{1996}^{col} \neq 0$
 
 Let the significance level be 0.05.
 
@@ -522,7 +522,7 @@ iii.
 
 *  **Prepare**
 
-$H_0: wage_{2015}^{diff} - wage_{1996}^{diff} = 0$ v.s. $H_1: wage_{2015}^{diff} - wage_{1996}^{diff} \neq 0$
+$H_0: \overline{wage}_{2015}^{diff} - \overline{wage}_{1996}^{diff} = 0$ v.s. $H_1: \overline{wage}_{2015}^{diff} - \overline{wage}_{1996}^{diff} \neq 0$
 
 Let the significance level be 0.05.
 
