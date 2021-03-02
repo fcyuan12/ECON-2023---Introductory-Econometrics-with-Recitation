@@ -283,7 +283,7 @@ E31a <- function(x){
   # i. sample mean
   mu <- mean(x)
   
-  # ii. sample standard deviation (standard error)
+  # ii. standard error = sample standard deviation (s) / sqrt(n)
   se <- sd(x)/sqrt(length(x))
   
   # test
@@ -567,10 +567,15 @@ E31fiii <- function(x11, x12, x21, x22){
   # difference in standard error
   se <- sqrt(SD1^2 + SD2^2)
   
-  Table <- data.frame(mu, se, SD1, SD2)
-  colnames(Table) <- c("Mean", "Standard Error", "SD1", "SD2")
+  # 95% confidence interval
+  lower <- round(mu - qnorm(0.975, mean = 0, sd = 1)*se, digit = 4)
+  upper <- round(mu + qnorm(0.975, mean = 0, sd = 1)*se, digit = 4)
+  CI <- paste(lower, "-"  ,upper)
   
-  Table
+  Table <- data.frame(mu, se, CI)
+  colnames(Table) <- c("Mean", "Standard Error", "95% Confidence Interval")
+  
+  Table 
 }
 
 E31fiii(CPS96col$ahe_adjust, CPS96hs$ahe_adjust, CPS15col$ahe, CPS15hs$ahe)
@@ -579,6 +584,7 @@ E31fiii(CPS96col$ahe_adjust, CPS96hs$ahe_adjust, CPS15col$ahe, CPS15hs$ahe)
 
 *  **Conclude**
 
+Because $0 \notin 95\%$ confidence interval, we reject $H_0$. There is statistically significance evidence that the gap between earnings of college and high school graduates increase.
 
 
 

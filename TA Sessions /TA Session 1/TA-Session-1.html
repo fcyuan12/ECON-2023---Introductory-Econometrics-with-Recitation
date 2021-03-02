@@ -806,7 +806,7 @@ E31a &lt;- function(x){
   # i. sample mean
   mu &lt;- mean(x)
   
-  # ii. sample standard deviation (standard error)
+  # ii. standard error = sample standard deviation (s) / sqrt(n)
   se &lt;- sd(x)/sqrt(length(x))
   
   # test
@@ -1149,18 +1149,24 @@ E31fi(CPS96hs$ahe_adjust, CPS15hs$ahe)</code></pre>
   # difference in standard error
   se &lt;- sqrt(SD1^2 + SD2^2)
   
-  Table &lt;- data.frame(mu, se, SD1, SD2)
-  colnames(Table) &lt;- c(&quot;Mean&quot;, &quot;Standard Error&quot;, &quot;SD1&quot;, &quot;SD2&quot;)
+  # 95% confidence interval
+  lower &lt;- round(mu - qnorm(0.975, mean = 0, sd = 1)*se, digit = 4)
+  upper &lt;- round(mu + qnorm(0.975, mean = 0, sd = 1)*se, digit = 4)
+  CI &lt;- paste(lower, &quot;-&quot;  ,upper)
   
-  Table
+  Table &lt;- data.frame(mu, se, CI)
+  colnames(Table) &lt;- c(&quot;Mean&quot;, &quot;Standard Error&quot;, &quot;95% Confidence Interval&quot;)
+  
+  Table 
 }
 
 E31fiii(CPS96col$ahe_adjust, CPS96hs$ahe_adjust, CPS15col$ahe, CPS15hs$ahe)</code></pre>
-<pre><code>##       Mean Standard Error       SD1       SD2
-## 1 2.464117      0.3566828 0.2431231 0.2609862</code></pre>
+<pre><code>##       Mean Standard Error 95% Confidence Interval
+## 1 2.464117      0.3566828          1.765 - 3.1632</code></pre>
 <ul>
 <li><strong>Conclude</strong></li>
 </ul>
+<p>Because <span class="math inline">\(0 \notin 95\%\)</span> confidence interval, we reject <span class="math inline">\(H_0\)</span>. There is statistically significance evidence that the gap between earnings of college and high school graduates increase.</p>
 <blockquote>
 <ol start="7" style="list-style-type: lower-alpha">
 <li>Table 3.1 presents information on the gender gap for college graduates. Prepare a similar table for high school graduates, using the 1996 and 2015 data. Are there any notable differences between the results for high school and college graduates?</li>
