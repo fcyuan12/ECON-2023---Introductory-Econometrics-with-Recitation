@@ -11,7 +11,7 @@
 
 <meta name="author" content="Chi-Yuan Fang" />
 
-<meta name="date" content="2021-02-28" />
+<meta name="date" content="2021-03-02" />
 
 <title>Empirical Exercise - E3.1</title>
 
@@ -413,7 +413,7 @@ summary {
 
 <h1 class="title toc-ignore">Empirical Exercise - E3.1</h1>
 <h4 class="author">Chi-Yuan Fang</h4>
-<h4 class="date">2021-02-28</h4>
+<h4 class="date">2021-03-02</h4>
 
 </div>
 
@@ -447,7 +447,7 @@ E31a &lt;- function(x){
   # i. sample mean
   mu &lt;- mean(x)
   
-  # ii. sample standard deviation (standard error)
+  # ii. standard error = sample standard deviation (s) / sqrt(n)
   se &lt;- sd(x)/sqrt(length(x))
   
   # test
@@ -759,7 +759,7 @@ E31fi(CPS96hs$ahe_adjust, CPS15hs$ahe)</code></pre>
 </ul>
 <p>Test statistics: <span class="math display">\[\begin{align}
     t 
-    &amp; = \frac{\left[ \left(\overline{w}_{2015}^{col} - \overline{w}_{2015}^{hs}\right) - \left(\overline{w}_{1996}^{col} - \overline{w}_{1996}^{hs}\right) \right] - 0}{\sqrt{ \left( \frac{s_{2015,col}^{2}}{n_{2015}^{col}} + \frac{s_{2015,hs}^{2}}{n_{2015}^{hs}} \right) + \left( \frac{s_{1996,col}^{2}}{n_{1996}^{col}} + \frac{s_{1996,hs}^{2}}{n_{1996}^{hs}} \right) }},
+    &amp; = \frac{\left[ \left(\overline{w}_{2015}^{col} - \overline{w}_{2015}^{hs}\right) - \left(\overline{w}_{1996}^{col} - \overline{w}_{1996}^{hs}\right) \right] - 0}{\sqrt{ \left( \frac{s_{2015,col}^{2}}{n_{2015}^{col}} + \frac{s_{2015,hs}^{2}}{n_{2015}^{hs}} \right) + \left( \frac{s_{1996,col}^{2}}{n_{1996}^{col}} + \frac{s_{1996,hs}^{2}}{n_{1996}^{hs}} \right) }}
 \end{align}\]</span></p>
 <p>95% confidence interval: <span class="math display">\[\begin{align}
      &amp; \left[ \left(\overline{w}_{2015}^{col} - \overline{w}_{2015}^{hs}\right) - \left(\overline{w}_{1996}^{col} - \overline{w}_{1996}^{hs}\right) \right] \pm Z_{0.025} \cdot \sqrt{ \left( \frac{s_{2015,col}^{2}}{n_{2015}^{col}} + \frac{s_{2015,hs}^{2}}{n_{2015}^{hs}} \right) + \left( \frac{s_{1996,col}^{2}}{n_{1996}^{col}} + \frac{s_{1996,hs}^{2}}{n_{1996}^{hs}} \right) }
@@ -790,18 +790,24 @@ E31fi(CPS96hs$ahe_adjust, CPS15hs$ahe)</code></pre>
   # difference in standard error
   se &lt;- sqrt(SD1^2 + SD2^2)
   
-  Table &lt;- data.frame(mu, se, SD1, SD2)
-  colnames(Table) &lt;- c(&quot;Mean&quot;, &quot;Standard Error&quot;, &quot;SD1&quot;, &quot;SD2&quot;)
+  # 95% confidence interval
+  lower &lt;- round(mu - qnorm(0.975, mean = 0, sd = 1)*se, digit = 4)
+  upper &lt;- round(mu + qnorm(0.975, mean = 0, sd = 1)*se, digit = 4)
+  CI &lt;- paste(lower, &quot;-&quot;  ,upper)
   
-  Table
+  Table &lt;- data.frame(mu, se, CI)
+  colnames(Table) &lt;- c(&quot;Mean&quot;, &quot;Standard Error&quot;, &quot;95% Confidence Interval&quot;)
+  
+  Table 
 }
 
 E31fiii(CPS96col$ahe_adjust, CPS96hs$ahe_adjust, CPS15col$ahe, CPS15hs$ahe)</code></pre>
-<pre><code>##       Mean Standard Error       SD1       SD2
-## 1 2.464117      0.3566828 0.2431231 0.2609862</code></pre>
+<pre><code>##       Mean Standard Error 95% Confidence Interval
+## 1 2.464117      0.3566828          1.765 - 3.1632</code></pre>
 <ul>
 <li><strong>Conclude</strong></li>
 </ul>
+<p>Because <span class="math inline">\(0 \notin 95\%\)</span> confidence interval, we reject <span class="math inline">\(H_0\)</span>. There is statistically significance evidence that the gap between earnings of college and high school graduates increase.</p>
 <blockquote>
 <ol start="7" style="list-style-type: lower-alpha">
 <li>Table 3.1 presents information on the gender gap for college graduates. Prepare a similar table for high school graduates, using the 1996 and 2015 data. Are there any notable differences between the results for high school and college graduates?</li>
