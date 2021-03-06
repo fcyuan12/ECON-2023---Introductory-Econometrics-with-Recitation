@@ -1,0 +1,345 @@
+---
+title: "Empirical Exercise - E5.1"
+author: "Chi-Yuan Fang"
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    number_sections: yes
+    toc: yes
+  pdf_document:
+    toc: yes
+
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+#library(kableExtra)
+```
+
+```{r packages, include=FALSE}
+library(openintro)
+library(tidyverse)
+data(COL)
+```
+
+> Use the data set **Earnings_and_Height** described in Empirical Exercise 4.2 to carry out the following exercises.
+
+> a. Run a regression of $Earnings$ on $Height$.
+>     i. Is the estimated slope statistically significant?
+>     ii. Construct a 95\% confidence interval for the slope coefficient.
+
+**Solution**
+
+i. 
+
+*  **Prepare**
+
+$H_0: \beta_{height} = 0$ v.s. $H_1: \beta_{height} \neq 0$
+
+Let the significance level be 0.05.
+
+*  **Calculate**
+
+```{r}
+# import data 
+library(readxl)
+Earnings_and_Height <- read_xlsx("Earnings_and_Height/Earnings_and_Height.xlsx")
+
+E51a_model <- lm(earnings ~ height, data = Earnings_and_Height)
+
+summary(E51a_model)
+
+```
+
+*  **Conclude**
+
+Because $p-value < 0.05$, we reject $H_0$. The estimated slope is statistically significant different from 0.
+
+ii.
+
+In simple regression model 
+\begin{align}
+    Y_i = \beta_0 + \beta_1 X_i + u_i,
+\end{align}
+we know
+\begin{align}
+    \widehat{\beta}_1
+    & = \frac{\sum_{i=1}^{n}\left(X_i - \overline{X} \right) \left(Y_i - \overline{Y} \right) }{\sum_{i=1}^{n}\left(X_i - \overline{X} \right)^2} \\
+    \widehat{\beta}_0
+    & = \overline{Y} - \widehat{\beta}_1 \overline{X} \\
+    ESS 
+    & = \sum_{i=1}^{n} \left( \widehat{Y}_i - \overline{Y} \right)^2 \\
+    TSS
+    & = \sum_{i=1}^{n} \left( Y_i - \overline{Y} \right)^2 \\
+    SSR 
+    & = \sum_{i=1}^{n} \widehat{u}_i^2 
+      = \sum_{i=1}^{n} \left( Y_i - \widehat{Y}_i \right)^2 \\
+    R^2 
+    & = \frac{ESS}{TSS} 
+      = 1 - \frac{SSR}{TSS} \\
+    \widehat{\sigma}^2 
+    & = \frac{\sum_{i=1}^{n} \widehat{u}_i^2}{n - 2} \\
+    SE\left( \widehat{\beta}_1 \right)
+    & = \sqrt{ \frac{\widehat{\sigma}^2}{\sum_{i=1}^{n} \left(X_i - \overline{X} \right)^2} } \\
+    SE\left( \widehat{\beta}_0 \right)
+    & = \sqrt{ \widehat{\sigma}^2 \left( \frac{1}{n} +  \frac{\overline{X}^2}{\sum_{i=1}^{n} \left(X_i - \overline{X} \right)^2} \right) } 
+\end{align}
+
+
+```{r}
+E51a <- function(x, y){
+  # numbers of sample
+  n <- length(y)
+  
+  # sample mean
+  xbar <- mean(x)
+  ybar <- mean(y)
+  
+  # OLS coefficient
+  b1hat <- cov(x,y)/var(x)
+  b0hat <- ybar - b1hat*xbar
+  
+  yhat <- b0hat + b1hat*x
+  
+  # explained sum of squares (ESS)
+  ESS <- sum((yhat - ybar)^2)
+  # total sum of squares (TSS)
+  TSS <- sum((y - ybar)^2)
+  # sum of squared residuals (SSR)
+  SSR <- sum((y - yhat)^2)
+  
+  # coefficient of determination
+  Rsqure <- ESS/TSS
+  
+  # standard error of the regression
+  SER <- sqrt(SSR/(n-2))
+  
+  # standard error of coefficient
+  se_b1hat <- sqrt(SER^2/sum((x - xbar)^2))
+  se_b0hat <- sqrt(SER^2* (1/n + xbar^2/sum((x - xbar)^2)))
+  
+  # 95% CI for b1hat
+  lower_b1hat <- round(b1hat - qnorm(0.975, mean = 0, sd = 1)*se_b1hat, digit = 4)
+  upper_b1hat <- round(b1hat + qnorm(0.975, mean = 0, sd = 1)*se_b1hat, digit = 4)
+  CI_b1hat <- paste(lower_b1hat, "-"  ,upper_b1hat)
+  
+  # 95% CI for b0hat
+  lower_b0hat <- round(b0hat - qnorm(0.975, mean = 0, sd = 1)*se_b0hat, digit = 4)
+  upper_b0hat <- round(b0hat + qnorm(0.975, mean = 0, sd = 1)*se_b0hat, digit = 4)
+  CI_b0hat <- paste(lower_b0hat, "-"  ,upper_b0hat)  
+  
+  # coefficient
+  coef <- matrix(c(b0hat, se_b0hat, CI_b0hat, b1hat, se_b1hat, CI_b1hat), ncol = 3, byrow = TRUE)
+  rownames(coef) <- c("Intercept", "Slope")
+  colnames(coef) <- c("Estimate", "Standard Error", "95% Confidence Interval")
+  
+  result <- list(coef, Rsqure)
+  names(result) <- c("Coefficients", "R-squared")
+  
+  result
+} 
+
+E51a(Earnings_and_Height$height, Earnings_and_Height$earnings)
+```
+
+> b. Repeat (a) for women.
+
+**Solution**
+
+i. 
+
+*  **Prepare**
+
+$H_0: \beta_{height}^{women} = 0$ v.s. $H_1: \beta_{height}^{women} \neq 0$
+
+Let the significance level be 0.05.
+
+*  **Calculate**
+
+```{r}
+# data: woman
+Earnings_and_Height_women <- Earnings_and_Height[Earnings_and_Height$sex == 0,]
+
+E51b_model <- lm(earnings ~ height, data = Earnings_and_Height_women)
+
+summary(E51b_model)
+
+```
+
+*  **Conclude**
+
+Because $p-value < 0.05$, we reject $H_0$. The estimated slope is statistically significant different from 0.
+
+ii.
+
+```{r}
+E51a(Earnings_and_Height_women$height, Earnings_and_Height_women$earnings)
+```
+
+
+> c. Repeat (a) for men.
+
+**Solution**
+
+i. 
+
+*  **Prepare**
+
+$H_0: \beta_{height}^{men} = 0$ v.s. $H_1: \beta_{height}^{women} \neq 0$
+
+Let the significance level be 0.05.
+
+*  **Calculate**
+
+```{r}
+# data: woman
+Earnings_and_Height_men <- Earnings_and_Height[Earnings_and_Height$sex == 1,]
+
+E51c_model <- lm(earnings ~ height, data = Earnings_and_Height_men)
+
+summary(E51c_model)
+
+```
+
+*  **Conclude**
+
+Because $p-value < 0.05$, we reject $H_0$. The estimated slope is statistically significant different from 0.
+
+ii.
+
+```{r}
+E51a(Earnings_and_Height_men$height, Earnings_and_Height_men$earnings)
+```
+
+
+> d. Test the null hypothesis that the effect of height on earnings is the same for men and women. (Hint: See Exercise 5.15.)
+
+**Solution**
+
+*  **Prepare**
+
+$H_0: \beta_{height}^{men} - \beta_{height}^{women} = 0$ v.s. $H_1: \beta_{height}^{men} - \beta_{height}^{women} \neq 0$
+
+Let the significance level be 0.05.
+
+*  **Calculate**
+
+```{r}
+E51d <- function(x1, y1, x2, y2){
+  # numbers of sample
+  n1 <- length(y1); n2 <- length(y2)
+  
+  # sample mean
+  x1bar <- mean(x1); x2bar <- mean(x2)
+  y1bar <- mean(y1); y2bar <- mean(y2)
+  
+  # OLS coefficient
+  b1hat1 <- cov(x1, y1)/var(x1); b1hat2 <- cov(x2, y2)/var(x2)
+  b0hat1 <- y1bar - b1hat1*x1bar; b0hat2 <- y2bar - b1hat2*x2bar
+  
+  y1hat1 <- b0hat1 + b1hat1*x1; y2hat2 <- b0hat2 + b1hat2*x2
+  
+  # explained sum of squares (ESS)
+  ESS1 <- sum((y1hat1 - y1bar)^2); ESS2 <- sum((y2hat2 - y2bar)^2)
+  # total sum of squares (TSS)
+  TSS1 <- sum((y1 - y1bar)^2); TSS2 <- sum((y2 - y2bar)^2)
+  # sum of squared residuals (SSR)
+  SSR1 <- sum((y1 - y1hat1)^2); SSR2 <- sum((y2 - y2hat2)^2)
+  
+  # standard error of the regression
+  SER1 <- sqrt(SSR1/(n1-2)); SER2 <- sqrt(SSR2/(n2-2))
+  
+  # standard error of coefficient
+  se_b1hat1 <- sqrt(SER1^2/sum((x1 - x1bar)^2))
+  se_b1hat2 <- sqrt(SER2^2/sum((x2 - x2bar)^2))
+  
+  est <- b1hat1 - b1hat2
+  se <- sqrt(se_b1hat1^2 + se_b1hat2^2)
+  
+  # 95% CI for difference
+  lower <- round(est - qnorm(0.975, mean = 0, sd = 1)*se, digit = 4)
+  upper <- round(est + qnorm(0.975, mean = 0, sd = 1)*se, digit = 4)
+  CI <- paste(lower, "-", upper)  
+  
+  # output table
+  Table <- data.frame(est, se, CI)
+  colnames(Table) <- c("Estimate", "Standard Error", "95% Confidence Interval")
+  
+  Table 
+  
+}
+
+E51d(Earnings_and_Height_men$height, Earnings_and_Height_men$earnings, Earnings_and_Height_women$height, Earnings_and_Height_women$earnings)
+```
+
+
+*  **Conclude**
+
+Because $0 \notin 95\%$ confidence interval, we reject $H_0$. The estimated slope is statistically significant different from 0.
+
+
+> e. One explanation for the effect of height on earnings is that some professions require strength, which is correlated with height. Does the effect of height on earnings disappear when the sample is restricted to occupations in which strength is unlikely to be important?
+
+**Solution**
+
+```{r}
+E51e <- function(x, y){
+  # numbers of sample
+  n <- length(y)
+  
+  # sample mean
+  xbar <- mean(x)
+  ybar <- mean(y)
+  
+  # OLS coefficient
+  b1hat <- cov(x,y)/var(x)
+  b0hat <- ybar - b1hat*xbar
+  
+  yhat <- b0hat + b1hat*x
+  
+  # explained sum of squares (ESS)
+  ESS <- sum((yhat - ybar)^2)
+  # total sum of squares (TSS)
+  TSS <- sum((y - ybar)^2)
+  # sum of squared residuals (SSR)
+  SSR <- sum((y - yhat)^2)
+  
+  # coefficient of determination
+  #Rsqure <- ESS/TSS
+  
+  # standard error of the regression
+  SER <- sqrt(SSR/(n-2))
+  
+  # standard error of coefficient
+  se_b1hat <- sqrt(SER^2/sum((x - xbar)^2))
+  
+  # 95% CI for b1hat
+  lower_b1hat <- round(b1hat - qnorm(0.975, mean = 0, sd = 1)*se_b1hat, digit = 4)
+  upper_b1hat <- round(b1hat + qnorm(0.975, mean = 0, sd = 1)*se_b1hat, digit = 4)
+  CI_b1hat <- paste(lower_b1hat, "-"  ,upper_b1hat)
+  
+  Table <- matrix(c(b1hat, se_b1hat, CI_b1hat), nrow = 1)
+  colnames(Table) <- c("Estimate", "Standard Error", "95% Confidence Interval")
+  
+  Table
+} 
+
+E51e_output <- matrix(nrow = 15, ncol = 3)
+
+rownames(E51e_output) <- c(1:15)
+colnames(E51e_output) <- c("Estimate", "Standard Error", "95% Confidence Interval")
+
+for (i in 1:15){
+  data <- Earnings_and_Height[Earnings_and_Height$occupation == i,]
+  x <- data$height
+  y <- data$earnings
+  E51e_output[i,] <- E51e(x, y)
+}
+
+E51e_output
+
+```
+
+
+
+

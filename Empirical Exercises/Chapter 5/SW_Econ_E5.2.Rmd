@@ -1,0 +1,113 @@
+---
+title: "Empirical Exercise - E5.2"
+author: "Chi-Yuan Fang"
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    number_sections: yes
+    toc: yes
+  pdf_document:
+    toc: yes
+
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+#library(kableExtra)
+```
+
+```{r packages, include=FALSE}
+library(openintro)
+library(tidyverse)
+data(COL)
+```
+
+> Using the data set *Growth* described in Empirical Exercise 4.1, but excluding the data for Malta, run a regression of $Growth$ on $TradeShare$.
+
+> a. Is the estimated regression slope statistically significant? That is, can you reject the null hypothesis $H_0: \beta_1 = 0$ vs. a two-sided alternative hypothesis at the 10\%, 5\%, or 1\% significance level?
+
+**Solution**
+
+*  **Prepare**
+
+$H_0: \beta_{height} = 0$ v.s. $H_1: \beta_{height} \neq 0$
+
+Let the significance level be 0.10, 0.05, or 0.01.
+
+*  **Calculate**
+
+```{r}
+# import data 
+library(readxl)
+Growth <- read_xlsx("Growth/Growth.xlsx")
+
+Growth_n <- Growth[Growth$country_name != "Malta",]
+
+E52a_model <- lm(growth ~ tradeshare, data = Growth_n)
+
+summary(E52a_model)
+
+```
+
+*  **Conclude**
+
+Because $p-value = 0.0937$, we reject $H_0$ at $\alpha = 0.10$, but do not reject $H_0$ at $\alpha = 0.05 \mbox{ or } 0.01$. 
+
+> b. What is the $p$-value associated with the coefficient’s $t$-statistic?
+
+**Solution**
+
+See part (a).
+
+> c. Construct a 90\% confidence interval for $\beta_1$.
+
+**Solution**
+
+```{r}
+E52c <- function(x, y){
+  # numbers of sample
+  n <- length(y)
+  
+  # sample mean
+  xbar <- mean(x)
+  ybar <- mean(y)
+  
+  # OLS coefficient
+  b1hat <- cov(x,y)/var(x)
+  b0hat <- ybar - b1hat*xbar
+  
+  yhat <- b0hat + b1hat*x
+  
+  # explained sum of squares (ESS)
+  ESS <- sum((yhat - ybar)^2)
+  # total sum of squares (TSS)
+  TSS <- sum((y - ybar)^2)
+  # sum of squared residuals (SSR)
+  SSR <- sum((y - yhat)^2)
+  
+  # coefficient of determination
+  #Rsqure <- ESS/TSS
+  
+  # standard error of the regression
+  SER <- sqrt(SSR/(n-2))
+  
+  # standard error of coefficient
+  se_b1hat <- sqrt(SER^2/sum((x - xbar)^2))
+  
+  # 95% CI for b1hat
+  lower_b1hat <- round(b1hat - qnorm(0.95, mean = 0, sd = 1)*se_b1hat, digit = 4)
+  upper_b1hat <- round(b1hat + qnorm(0.95, mean = 0, sd = 1)*se_b1hat, digit = 4)
+  CI_b1hat <- paste(lower_b1hat, "-"  ,upper_b1hat)
+  
+  Table <- matrix(c(b1hat, se_b1hat, CI_b1hat), nrow = 1)
+  colnames(Table) <- c("Estimate", "Standard Error", "90% Confidence Interval")
+  
+  Table
+} 
+
+E52c(Growth_n$tradeshare, Growth_n$growth)
+```
+
+
+
+
