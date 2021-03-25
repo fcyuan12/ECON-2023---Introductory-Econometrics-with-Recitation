@@ -10,7 +10,7 @@ library(broom.mixed); library(huxtable)
 
 # import data 
 library(readxl)
-Birthweight_Smoking <- read_excel("Birthweight_Smoking/Birthweight_Smoking.xlsx")
+Birthweight_Smoking <- read_excel("TA Sessions/Empirical Exercises/Chapter 6/Birthweight_Smoking/Birthweight_Smoking.xlsx")
 
 E61a <- lm(birthweight ~ smoker, data = Birthweight_Smoking)
 
@@ -21,7 +21,7 @@ summ(E61a, confint = TRUE, digits = 4)
 #####
 
 # nprevist: total number of prenatal visits
-E61b <- lm(birthweight ~ smoker + alcohol + nprevist, data = Birthweight_Smoking)
+E61b <- lm(birthweight ~   smoker + alcohol + nprevist, data = Birthweight_Smoking)
 
 summ(E61b, confint = TRUE, digits = 4)
 
@@ -73,10 +73,21 @@ export_summs(E61b, E61c3,
 # d.
 #####
 
+E61d <- lm(birthweight ~ smoker + alcohol + tripre0 + tripre2 + tripre3, data = Birthweight_Smoking)
 
+summ(E61d, confint = TRUE, digits = 4)
 
+#####
+# d. # i.
+#####
 
+E61di <- lm(birthweight ~ smoker + alcohol + tripre0 + tripre1 + tripre2 + tripre3, data = Birthweight_Smoking)
 
+summ(E61di, confint = TRUE, digits = 4)
 
+#####
+# d. # iv.
+#####
 
-
+export_summs(E61b, E61d, 
+             model.names = c("Model (b)", "Model (d)"))
